@@ -1,122 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<title>House Price Prediction</title>
+<title>Property Price Estimator</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
 }
 
 body{
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    color:#333;
+background:#f3f6fb;
 }
 
-.container{
-    width:420px;
-    background:white;
-    border-radius:12px;
-    padding:35px;
-    box-shadow:0 15px 40px rgba(0,0,0,0.25);
-    animation:fadeIn 0.8s ease-in-out;
+/* HERO */
+
+.hero{
+height:45vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+background:linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)),
+url("https://images.unsplash.com/photo-1560518883-ce09059eeffa");
+background-size:cover;
+background-position:center;
+color:white;
 }
+
+.hero h1{
+font-size:40px;
+margin-bottom:10px;
+}
+
+.hero p{
+font-size:18px;
+opacity:0.9;
+}
+
+/* FORM CONTAINER */
+
+.form-container{
+display:flex;
+justify-content:center;
+margin-top:-70px;
+padding:20px;
+}
+
+.card{
+
+background:white;
+width:760px;
+padding:40px;
+border-radius:14px;
+box-shadow:0 15px 35px rgba(0,0,0,0.12);
+
+}
+
+/* TITLE */
 
 .title{
-    text-align:center;
-    margin-bottom:25px;
+font-size:24px;
+font-weight:600;
+text-align:center;
+margin-bottom:25px;
+color:#333;
 }
 
-.title h1{
-    font-size:24px;
-    color:#2c3e50;
+/* GRID */
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:16px;
 }
 
-.title p{
-    font-size:13px;
-    color:#777;
-}
-
-.input-group{
-    margin-bottom:15px;
-}
-
-label{
-    font-size:14px;
-    font-weight:600;
-    display:block;
-    margin-bottom:6px;
-}
+/* INPUTS */
 
 input{
-    width:100%;
-    padding:10px;
-    border-radius:6px;
-    border:1px solid #ccc;
-    font-size:14px;
-    transition:0.3s;
+padding:12px;
+border-radius:7px;
+border:1px solid #ddd;
+font-size:14px;
+transition:0.2s;
 }
 
 input:focus{
-    outline:none;
-    border-color:#3498db;
-    box-shadow:0 0 5px rgba(52,152,219,0.3);
+outline:none;
+border-color:#3b82f6;
+box-shadow:0 0 0 2px rgba(59,130,246,0.2);
 }
 
+/* BUTTON */
+
 button{
-    width:100%;
-    padding:12px;
-    margin-top:10px;
-    border:none;
-    border-radius:6px;
-    background:linear-gradient(45deg,#3498db,#2ecc71);
-    color:white;
-    font-size:15px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:0.3s;
+
+margin-top:20px;
+width:100%;
+padding:14px;
+background:#3b82f6;
+border:none;
+border-radius:8px;
+color:white;
+font-size:16px;
+cursor:pointer;
+transition:0.3s;
+
 }
 
 button:hover{
-    transform:scale(1.03);
-    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+background:#2563eb;
 }
+
+/* RESULT */
 
 .result{
-    margin-top:20px;
-    padding:12px;
-    border-radius:6px;
-    background:#ecf9f1;
-    text-align:center;
-    font-weight:bold;
-    color:#27ae60;
-}
 
-.footer{
-    margin-top:20px;
-    text-align:center;
-    font-size:12px;
-    color:#888;
-}
+margin-top:20px;
+padding:16px;
+border-radius:8px;
+background:#eef4ff;
+text-align:center;
+font-size:18px;
+font-weight:600;
+color:#2563eb;
 
-@keyframes fadeIn{
-    from{
-        opacity:0;
-        transform:translateY(20px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
 }
 
 </style>
@@ -124,47 +139,56 @@ button:hover{
 
 <body>
 
-<div class="container">
+<section class="hero">
 
-<div class="title">
-<h1>🏠 House Price Predictor</h1>
-<p>Machine Learning Web Application</p>
+<div>
+<h1>Property Price Estimator</h1>
+<p>Estimate property value based on family and housing details</p>
 </div>
+
+</section>
+
+
+<div class="form-container">
+
+<div class="card">
+
+<div class="title">Enter Property Information</div>
 
 <form action="/predict" method="post">
 
-<div class="input-group">
-<label>Median Income</label>
-<input type="text" name="income" placeholder="e.g. 8.3252" required>
+<div class="grid">
+
+<input type="number" name="income" placeholder="Family Monthly Income" required>
+
+<input type="number" name="family_members" placeholder="Family Members" required>
+
+<input type="number" name="bedrooms" placeholder="Bedrooms Needed" required>
+
+<input type="number" name="house_size" placeholder="House Size (sqft)" required>
+
+<input type="number" name="location_score" placeholder="Location Score (1-10)" required>
+
+<input type="number" name="distance_city" placeholder="Distance From City (km)" required>
+
+<input type="number" name="house_age" placeholder="House Age (years)" required>
+
+<input type="number" name="facilities" placeholder="Nearby Facilities Score (1-10)" required>
+
 </div>
 
-<div class="input-group">
-<label>House Age</label>
-<input type="text" name="age" placeholder="e.g. 41" required>
-</div>
-
-<div class="input-group">
-<label>Average Rooms</label>
-<input type="text" name="rooms" placeholder="e.g. 6.98" required>
-</div>
-
-<div class="input-group">
-<label>Population</label>
-<input type="text" name="population" placeholder="e.g. 322" required>
-</div>
-
-<button type="submit">Predict Price</button>
+<button type="submit">Predict Property Price</button>
 
 </form>
 
 {% if prediction_text %}
+
 <div class="result">
 {{ prediction_text }}
 </div>
+
 {% endif %}
 
-<div class="footer">
-Created with Flask & Scikit-Learn
 </div>
 
 </div>
